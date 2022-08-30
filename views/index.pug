@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title= title
+    body
+       div 
+        each worker in data 
+          p= worker.name
+          p= worker.field 
+          p= worker.age 
+          p= worker.salary
+
+        //pug makes things to be dynamic
+        // no closing tags
+
+//- //https://www.ubercompute.com/html-to-pug
+//- https://www.pug2html.com/
+//- https://codebeautify.org/pug-to-html-converter
+//- https://pughtml.com/
+
+

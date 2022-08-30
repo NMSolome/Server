@@ -1,0 +1,96 @@
+//- <!DOCTYPE html>
+//- <html lang="en">
+//-   <head>
+//-     <title>Hello, World!</title>
+//-   </head>
+//-   <body>
+//-     <h1>Hello, World!</h1>
+//-     <div class="remark">
+//-       <p>Pug rocks!!</p>
+//-     </div>
+//-   </body>
+//- </html>
+
+//- <nav id="navbar-default">
+//-   <div class="container-fluid">
+//-     <h1 class="navbar-header">My Website!</h1>
+//-   </div>
+//- </nav>
+//- <nav id="navbar-default">
+//-   <div class="container-fluid">
+//-     <h1 class="navbar-header">My Website!</h1>
+//-   </div>
+//- </nav>
+//- <ul>
+//-   <li><a href="/">Home</a></li>
+//-   <li><a href="/page-1">Page 1</a></li>
+//-   <li><a href="/page-2">Page 2</a></li>
+//- //- </ul>
+//- <input class="search" type="text" name="search" placeholder="Enter a search term..."/>
+//- <p>
+//-   You are logged in as
+//-   user@example.com
+//- </p>
+
+doctype html
+html(lang="en")
+    head
+        title Hello, World
+    body
+        h1 Hello Javascript
+        div.remark
+            p Pug Rocks!
+        nav#navbar-default
+            .container-fluid
+                h1.navbar-header My Website
+        ul
+            li
+                a(href="/") Home
+            li
+                a(href="/page-1") Page 1
+            li
+                a(href="/page-2") Page 2
+        input.search(
+            type="text"
+            name="search"
+            placeholder="entera search term..."
+        )
+        p
+            | You are logged in as user
+            br
+            | user
+        p.
+           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.
+ 
+        - const name = "Jim"
+        p Hi #{name}
+        p= 'Two to the power of ten is: ' + 2**10
+        - const employees = ['Angela', 'Jim', 'Nilson', 'Simone'] 
+        ul
+        each employee in employees
+            li= employee
+
+        -
+        const employee = {
+            firstName: 'James',
+            lastName: 'Hibbard',
+            extn: '12345'
+        }
+
+        -
+            const employee = {
+            firstName: 'James',
+            lastName: 'Hibbard',
+            extn: '12345'
+        }
+
+        #employee
+            p= `${employee.firstName} ${employee.lastName}`
+            p Extension:
+            if employee.extn
+            =employee.extn
+            else
+            | n/a
