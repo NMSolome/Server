@@ -1,4 +1,9 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+// const passport = require("passport");
+// const eoassportLocalMongoose = require("express");
+const passportLocalMongoose = require("passport-local-mongoose");
+
+
 
 const signupSchema = new mongoose.Schema({
     firstname: {
@@ -28,4 +33,5 @@ const signupSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model("Signup", signupSchema);
+signupSchema.plugin(passportLocalMongoose, {usernameField: "email"});
+module.exports = mongoose.model("signUp", signupSchema);
