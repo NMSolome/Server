@@ -13,7 +13,7 @@ router.get("/signUp", (req, res) => {
 router.post("/signUp", async (req, res) => {
         const signup = new Signup(req.body);
         console.log(req.body);
-        await Signup.register(signUp, req.body.password, (err) => {
+        await Signup.register(signup, req.body.password, (err) => {
             if (err) {
                 res.status(400).render("signUp");
                 console.log(err);
@@ -23,6 +23,13 @@ router.post("/signUp", async (req, res) => {
         });
     });
 
+    //log out route
+    router.get('/logout', (req, res)=>{
+        req.session.destroy(()=>{
+            res.redirect('/login')
+        })
+      })
+      
 
 
 module.exports = router

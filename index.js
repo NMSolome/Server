@@ -8,8 +8,9 @@ const workerRoutes = require("./routes/workerRoutes")
 // const produceRoutes = require("./routes/produceRoutes")
 const signUpRoutes = require("./routes/signUpRoutes")
 const logInRoutes = require("./routes/logInRoutes")
+const randomRoutes = require("./routes/randomRoutes")
 
-const signUpModel = require("./models/signUp")
+const Signup = require("./models/signUp")
 const router = require("./routes/signUpRoutes")
 
 const app = express()
@@ -51,6 +52,7 @@ passport.deserializeUser(Signup.deserializeUser());
 app.use("/", workerRoutes)
 app.use("/", signUpRoutes)
 app.use("/", logInRoutes)
+app.use("/", randomRoutes)
 
 // app.get("/", async(req, res)=> {
 //     const workers = await workerModel.find({})

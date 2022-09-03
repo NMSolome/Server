@@ -1,22 +1,27 @@
 const { application } = require("express")
 const express = require("express")
 const workerModel = require("../models/workerModel")
+const connectEnsureLogin = require("connect-ensure-login");
+
 
 const router = express.Router()
 
-// router.get("/", async (req, res)=> {
-//     const produce = await produceModel.find({})
-//     res.render("produce",{
-//         title: "Producers", produce
-//     })
-// })
+router.get("/", connectEnsureLogin.ensureLoggedIn(),
+async (req, res)=> {
+    const workers = await workerModel.find({})
+    res.render("worker",{
+        title: "Employees", workers
+    })
+})
 
 
-router.get("/profile", (req, res) =>{
+router.get("/profile", connectEnsureLogin.ensureLoggedIn()
+,(req, res) =>{
     res.render("test")
 })
 
-router.get("/worker-form", (req, res) =>{
+router.get("/worker-form", connectEnsureLogin.ensureLoggedIn(),
+(req, res) =>{
     res.render("WorkerForm")
 })
 
@@ -27,7 +32,8 @@ router.get("/worker-form", (req, res) =>{
 // delete - deletes info from database
 
 //post routes
-router.post("/newWorker", async (req, res)=>{
+router.post("/newWorker", connectEnsureLogin.ensureLoggedIn(),
+async (req, res)=>{
     try{
     const newWorker = new workerModel(req.body)
     await newWorker.save()
@@ -40,10 +46,12 @@ catch(err){
 })
 
 // get routes
-router.get("/worker-list", async (req, res) =>{
+router.get("/worker-list", connectEnsureLogin.ensureLoggedIn(),
+async (req, res) =>{
     try{
+        console.log(req.user.firstname)
         let items = await workerModel.find();
-        res.render("workerList", {workers: items})
+        res.render("workerList", {workers: items, username: req.user.firstname})
     }
     catch(err){
         console.log(err)
@@ -52,7 +60,8 @@ router.get("/worker-list", async (req, res) =>{
 })
 
 //delete routes
-router.post("/worker-list", async (req, res) =>{
+router.post("/worker-list", connectEnsureLogin.ensureLoggedIn(),
+async (req, res) =>{
     try{
         await workerModel.deleteOne({
             _id: req.body._id
@@ -65,7 +74,8 @@ router.post("/worker-list", async (req, res) =>{
 })
 
 //edit/ update routes
-router.get("/editWorker/:id", async (req, res)=>{
+router.get("/editWorker/:id", connectEnsureLogin.ensureLoggedIn(),
+async (req, res)=>{
     try {
         const currentWorker = await workerModel.findById({_id:req.params.id})
         res.render("editWorker",{worker:currentWorker})
@@ -74,7 +84,8 @@ router.get("/editWorker/:id", async (req, res)=>{
     }
 })
 
-router.post("/editWorker", async (req, res)=>{
+router.post("/editWorker", connectEnsureLogin.ensureLoggedIn(),
+async (req, res)=>{
     try {
         await workerModel.findByIdAndUpdate({_id:req.query.id}, req.body)
         res.redirect("/worker-list")
